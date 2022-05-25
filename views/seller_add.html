@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Product</title>
-    <!-- <link rel=stylesheet href="style.css"> -->
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <!-- <script  src="js/selleradd.js"></script> -->
 </head>
 
 <body>
@@ -30,22 +30,15 @@
             &emsp;<label>Type</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <select id="option" name="ptype">
               <option value="">-Choose a type</option>
-                <!-- <option value="Vegetable">Vegetable</option>
-                <option value="Fruit">Fruit</option> -->
               </select>
           </div><div class="clear"></div><div id="error-message-style-sub-1"></div></div><br>
 
-
-
-        <!-- &emsp;<label for="pcategory" class="label">Category</label>&nbsp;&nbsp; <input name="pcategory" id="pcategory" type="text" class="input" placeholder="Type here"><br><br>
-        &emsp;<label for="ptype" class="label">Type</label> &emsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="ptype" id="ptype" type="text" class="input" placeholder="Type here"><br><br> -->
         &emsp;<label for="price" class="label">Price</label>&emsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="price" id="price" type="text" class="input" placeholder="Type here.."><br><br>
         &emsp;<input type="submit" class="button" value="Submit"> 
   </form>
-   
-</body>
-<script>
-  $("#categoryselect").change ( function () {
+
+  <script>
+    $("#categoryselect").change ( function () {
     var targID  = $(this).val ();
     console.log(targID);
     if(targID=='Electronic')
@@ -68,7 +61,9 @@
       $("#option").append("<option value =Fruit>Fruit</option>");
     }
 } )
-</script>
+  </script>
+   
+</body>
 </html>
 
 

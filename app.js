@@ -20,7 +20,7 @@ con.connect(function(err){
     console.log("Connected")
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public/')));
 app.set('view engine','html');
 app.engine('html', require('ejs').renderFile);
 
@@ -70,21 +70,6 @@ app.post("/seller2",(req,res)=>{
 });
 
 app.post("/confirm",(req,res)=>{
-
-//      var sql = "INSERT INTO productinfo SELECT * FROM recentlyadded;"
-//      con.query(sql, function (err, result) { 
-//                     if (err) throw err;
-//                     console.log("Records are inserted in the main table");
-//      })
-    
-
-//          var sql1 = "DELETE FROM recentlyadded";  
-//       con.query(sql1,function (err, result) { 
-//               if (err) throw err; 
-//         });  
-//  res.render('home.html');
-
-
     var sql = "INSERT INTO productinfo (pname, pcategory, ptype, price) VALUES (?,?,?,?)";  
         con.query(sql, [req.body.name,req.body.category,req.body.type,req.body.price], function (err, result) { 
             if (err) throw err;
