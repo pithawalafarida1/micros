@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+ <title>Table layout</title>
+
+ <!-- <link rel="stylesheet" href="style/main.css"> -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>  
+ <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>  
+ <style>
+   @import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
+   
+*{
+ margin:0;
+ padding: 0;
+ outline: 0;
+}
+
+/* .filter{
+ position: absolute;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ z-index: 1;
+ background: rgb(233,76,161);
+background: -moz-linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(199,74,233,1) 100%);
+background: -webkit-linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(199,74,233,1) 100%);
+background: linear-gradient(90deg, rgba(233,76,161,1) 0%, rgba(199,74,233,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e94ca1",endColorstr="#c74ae9",GradientType=1);
+opacity: .7;
+} */
+table{
+ /* position: absolute; */
+ z-index: 2;
+ /* left: 50%;
+ top: 50%; */
+ /* transform: translate(25%,50%); */
+ width: 60%; 
+ border-collapse: collapse;
+ border-spacing: 0;
+ box-shadow: 0 2px 15px rgba(64,64,64,.7);
+ border-radius: 12px 12px 0 0;
+ overflow: auto;
+ margin-left:5%;
+ margin-top:3%;
+
+}
+td , th{
+ padding: 15px 20px;
+ text-align: center;
+ 
+
+}
+th{
+ background-color: black;
+ color: #fafafa;
+ font-family: 'Open Sans',Sans-serif;
+ font-weight: 200;
+ text-transform: uppercase;
+
+}
+tr{
+ width: 100%;
+ background-color: #fafafa;
+ font-family: 'Montserrat', sans-serif;
+}
+tr:nth-child(even){
+ background-color: #eeeeee;
+}
+
+a:hover{
+  color:black;
+  visibility: visible;
+}
+
+
+ </style>
+</head>
+
+<body>
+
+
+<div class="container">
+
+<div class="table">
+<form id="form" method="POST" class="form">
+ &emsp;&emsp;&emsp;<table id="empTable" class="tableclass" >
+   
+
+    <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Type</th>
+          <th>Price</th>
+          <th></th>
+          <th></th>
+    </tr>
+
+   
+    <% if(result.length>0) { %>
+        <% result.forEach(function(eachres){ %>
+          
+    <tr>
+          <td><%= eachres.pname %></td>
+          <td><%= eachres.pcategory %></td>
+          <td><%= eachres.ptype %></td>
+          <td><%= eachres.price %></td>
+          <td><a onClick="editRow(this)" onmouseover="" style="color: blue;cursor: pointer;">Edit</a></td>
+          <td><a onClick="deleteRow(this)" onmouseover="" style="color: blue;cursor: pointer;">Delete</a></td>
+          <!-- <td><input type="button" value="Delete" class=btnclass onclick="deleteRow(this)" style="height:25px; width:65px"/></td> -->
+    </tr>
+    
+    <% }) %>
+    <%  } else { %>
+      <tr>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+        <td>--</td>
+  </tr>
+    <% } %>
+
+    <p id="info"></p>
+</table>
+</form>
+</div>
+
+<div class="add">
+  <form method="POST" action="/seller_add" class="addProduct" id="addProduct">
+    <br><br>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" value="Add" id="addp" style="height:40px; width:100px; font-size: large;">
+</form>
+</div>
+
+<div class="submit">
+  <form method="POST" method="/confirm">
+    <!-- <br><br>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" value="Cofirm" id="confirm" style=" font-size: large; height:40px; width:100px"> -->
+    <br><br>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" value="Cofirm" id="confirm" onclick="confirmm(event)" style=" font-size: large; height:40px; width:100px">
+</form>
+
+<div class="submit">
+  <form method="POST" action="/back">
+    <br><br>&emsp;&emsp;&emsp;&emsp;&emsp;<input type="submit" value="Back" id="back" style=" font-size: large; height:40px; width:100px">
+</form>
+</div>
+
+</div>
+
+<script>
+
+function editRow(btn) 
+{
+
+    console.log("Inside the Edit button");
+    var row = btn.parentNode.parentNode;
+  var deleted_row= row.getElementsByTagName('td');
+  mydict=
+{
+  name:deleted_row[0].innerHTML,
+  category:deleted_row[1].innerHTML,
+  type:deleted_row[2].innerHTML,
+  price:deleted_row[3].innerHTML,
+}
+fetch('http://localhost:3000/delete2',{
+                  method:'POST',
+                  body:new URLSearchParams(mydict),
+                  }).then(res => {
+                    console.log(res);
+                  })
+
+  //console.log(row.getElementsByTagName('td')[0].innerHTML);
+
+
+  row.parentNode.removeChild(row);
+
+  
+    
+    $("#addp").click();
+}
+
+function deleteRow(btn) {
+
+  console.log("Inside the delete button");
+  var row = btn.parentNode.parentNode;
+  var deleted_row= row.getElementsByTagName('td');
+  mydict=
+{
+  name:deleted_row[0].innerHTML,
+  category:deleted_row[1].innerHTML,
+  type:deleted_row[2].innerHTML,
+  price:deleted_row[3].innerHTML,
+}
+fetch('http://localhost:3000/delete2',{
+                  method:'POST',
+                  body:new URLSearchParams(mydict),
+                  }).then(res => {
+                    console.log(res);
+                  })
+
+  //console.log(row.getElementsByTagName('td')[0].innerHTML);
+
+
+  row.parentNode.removeChild(row);
+
+  
+
+//   mydata=[];
+
+//   var myTab = document.getElementById('empTable');
+
+//       for (i = 1; i < myTab.rows.length; i++) {
+        
+//           myarray=[];
+//           mydict={}; 
+//             var objCells = myTab.rows.item(i).cells;
+
+//       for (var j = 0; j < objCells.length; j++) {
+//               table_left= objCells.item(j).innerHTML;
+//               myarray.push(table_left);
+//     }
+// console.log(myarray);
+// mydict=
+// {
+//   name:myarray[0],
+//   category:myarray[1],
+//   type:myarray[2],
+//   price:myarray[3],
+// }
+
+// mydata.push(mydict);
+// if(myarray.length!=0)
+// {
+//     fetch('http://localhost:3000/delete',{
+//                   method:'POST',
+//                   body:new URLSearchParams(mydict),
+//                   }).then(res => {
+//                     console.log(res);
+//                   })
+// }
+// }
+// console.log(mydata);
+// dict1={};
+// dict1={record:mydata};
+// var mydata1 = new URLSearchParams();
+// mydata1.append(dict1);
+
+}
+</script>
+
+<script>
+  function confirmm(e)
+  {
+    var myTab = document.getElementById('empTable');
+    mydata=[];
+      for (i = 1; i < myTab.rows.length; i++) {
+        
+          myarray=[];
+          mydict={}; 
+            var objCells = myTab.rows.item(i).cells;
+
+      for (var j = 0; j < objCells.length; j++) {
+              table_left= objCells.item(j).innerHTML;
+              myarray.push(table_left);
+    }
+mydict=
+{
+  name:myarray[0],
+  category:myarray[1],
+  type:myarray[2],
+  price:myarray[3],
+}
+
+mydata.push(mydict);
+if(myarray.length!=0)
+{
+fetch('http://localhost:3000/confirm',{
+               method:'POST',
+               body:new URLSearchParams(mydict),
+              }).then(res => {
+                console.log(res);
+                console.log("DONE DONE DONE");
+                swal("Entries Confirmed!", "You will be Redirected to main menu!", "success"); 
+                window.setTimeout(function(){$("#back").click();},3000);
+                
+                // $("#back").click();
+                // location.reload();
+              })
+}
+else
+{
+  console.log("nothing in table");
+  swal("Okay!", "You have added no Entries!", "success");
+}
+
+}
+// swal("Okay!", "You have added no Entries!", "success");
+
+}
+</script>
+
+</body>
+
+</html>

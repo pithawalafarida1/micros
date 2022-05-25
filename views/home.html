@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product Microservice</title>
+    <!-- <link rel=stylesheet href="style.css"> -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <style>
+        /* .body { background:#005284; padding:2em;}
+        .flex-parent 
+        {
+            display: flex;
+            height:50%;
+        }
+
+        .jc-center 
+        {
+            justify-content: center;
+        }
+        .but
+        {
+            width:100%;
+        }
+        .but1
+        {
+            width:100%;
+        } */
+    </style>
+</head>
+
+<body>
+<div class="flex-parent jc-center">
+    <br><br><p>&emsp;&emsp;Choose Your Role:</p>
+  <form method="POST" action="/buyerr">
+      <br><br>&emsp;&emsp;<input type="submit" value="BUYER" id="buy" class="but" style="height:50px; width:100px; font-size: large;"><br><br><br><br>
+  </form>
+</div>
+
+
+<div class="flex-parent jc-center">
+  <form method="POST" action="/seller">
+    &emsp;&emsp;<input type="submit" value="SELLER" id="sell" class="but1" style="height:50px; width:100px; font-size: large;">
+  </form>
+</div>
+   
+</body>
+</html>

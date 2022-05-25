@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Product</title>
+    <!-- <link rel=stylesheet href="style.css"> -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+
+<body>
+
+  <br><br><p>&emsp;Enter The Product details here!</p>
+  
+  <form action="/seller2" method="POST">    
+        <br><br>&emsp;<label for="pname" class="label">Name</label>&emsp; &nbsp;&nbsp;&nbsp;<input name="pname" id="pname" type="text" class="input" placeholder="Type here.."><br><br>
+
+
+
+          <div class="ccms_form_element cfdiv_custom" id="style_container_div">
+            &emsp;<label>Category</label>&nbsp;&nbsp;<select size="1" id="categoryselect" class=" validate['required']" title="" type="select" name="pcategory">
+          <option value="">-Choose A Category-</option>
+          <option value="Electronic">Electronic</option>
+          <option value="Book">Book</option>
+          <option value="Grocery">Grocery</option>
+          </select><div class="clear"></div><div id="error-message-style"></div></div><br>
+
+    
+          <div id="commonid"  class="style-sub-1" name="stylesub1">
+            &emsp;<label>Type</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select id="option" name="ptype">
+              <option value="">-Choose a type</option>
+                <!-- <option value="Vegetable">Vegetable</option>
+                <option value="Fruit">Fruit</option> -->
+              </select>
+          </div><div class="clear"></div><div id="error-message-style-sub-1"></div></div><br>
+
+
+
+        <!-- &emsp;<label for="pcategory" class="label">Category</label>&nbsp;&nbsp; <input name="pcategory" id="pcategory" type="text" class="input" placeholder="Type here"><br><br>
+        &emsp;<label for="ptype" class="label">Type</label> &emsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="ptype" id="ptype" type="text" class="input" placeholder="Type here"><br><br> -->
+        &emsp;<label for="price" class="label">Price</label>&emsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="price" id="price" type="text" class="input" placeholder="Type here.."><br><br>
+        &emsp;<input type="submit" class="button" value="Submit"> 
+  </form>
+   
+</body>
+<script>
+  $("#categoryselect").change ( function () {
+    var targID  = $(this).val ();
+    console.log(targID);
+    if(targID=='Electronic')
+    {
+      $("#option").append("<option value =Laptop>Laptop</option>");
+      $("#option").append("<option value =Washing Machine>Washing Machine</option>");
+    }
+
+    else if(targID=='Book')
+    {
+      var txt = "<select id='option name'='ptype'><option value ='Laptop'>Laptop</option></select>";
+      $(txt).find("select option[value='" + 'Laptop' + "']").remove();
+      $("#option").append("<option value =Romance>Romance</option>");
+      $("#option").append("<option value =Thriller>Thriller</option>");
+    }
+
+    else if(targID=='Grocery')
+    {
+      $("#option").append("<option value =Vegetable>Vegetable</option>");
+      $("#option").append("<option value =Fruit>Fruit</option>");
+    }
+} )
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
